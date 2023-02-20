@@ -20,6 +20,7 @@ FROM node:16-bullseye-slim
 #     yarn config set python /usr/bin/python3
 
 # From here on we use the least-privileged `node` user to run the backend.
+RUN mkdir -p /app && chown node /app
 USER node
 
 # This should create the app dir as `node`.
