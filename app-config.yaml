@@ -73,7 +73,11 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
+  providers:
+    google:
+      development:
+        clientId: ${GOOGLE_OAUTH_CLIENT_ID}
+        clientSecret: ${GOOGLE_OAUTH_CLIENT_SECRET}
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
