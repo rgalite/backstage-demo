@@ -1,0 +1,40 @@
+apiVersion: skaffold/v4beta2
+kind: Config
+metadata:
+  name: backstage
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: europe-west1-docker.pkg.dev/sandbox-314208/backstage/backend
+    docker:
+      dockerfile: packages/backend/Dockerfile
+    hooks:
+      before:
+        - command:
+            - yarn
+            - install
+            - --frozen-lockfile
+        - command:
+          - yarn
+          - tsc
+        - command:
+          - yarn
+          - build:backend 
+manifests:
+  kustomize:
+    paths:
+    - k8s-manifests
+profiles:
+- name: dev
+  manifests:
+    kustomize:
+      paths:
+      - k8s-manifests/namespace-dev
+      - k8s-manifests/dev
+- name: prod
+  manifests:
+    kustomize:
+      paths:
+      - k8s-manifests/namespace-prod
+      - k8s-manifests/prod

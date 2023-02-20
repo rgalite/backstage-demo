@@ -1,0 +1,10 @@
+resources:
+- ../base
+- postgres-deployment.yaml
+- postgres-storage.yaml
+- postgres-service.yaml
+
+namespace: backstage-dev
+
+patches:
+  - path: deployment.yaml
